@@ -2,7 +2,7 @@ package com.hitwh.secondhand.common;
 
 /**
  * 统一状态码枚举
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 public enum ResultCode {
 

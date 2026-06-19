@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * JWT 登录拦截器：校验请求头中的 Token，并把用户信息放入 request
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @Component
 public class JwtInterceptor implements HandlerInterceptor {

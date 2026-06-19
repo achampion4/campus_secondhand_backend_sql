@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Web MVC 配置：注册 JWT 拦截器并设置放行白名单
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {

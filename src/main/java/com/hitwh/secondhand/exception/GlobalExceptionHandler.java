@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理器：统一捕获异常并返回标准结果
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {

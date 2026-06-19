@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 统一返回结果封装
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  *
  * @param <T> 数据类型
  */

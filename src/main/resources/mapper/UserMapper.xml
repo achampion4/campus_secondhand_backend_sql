@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 用户 SQL 映射  负责人：董炜文  日期：6/18 -->
+<mapper namespace="com.hitwh.secondhand.mapper.UserMapper">
+
+    <select id="findByUsername" resultType="com.hitwh.secondhand.entity.User">
+        SELECT * FROM `user` WHERE username = #{username}
+    </select>
+
+    <select id="findById" resultType="com.hitwh.secondhand.entity.User">
+        SELECT * FROM `user` WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO `user` (username, password, nickname, role, status)
+        VALUES (#{username}, #{password}, #{nickname}, 0, 1)
+    </insert>
+
+    <update id="updateProfile">
+        UPDATE `user`
+        <set>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+</mapper>

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 校园二手交易平台 后端启动类
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @SpringBootApplication
 @MapperScan("com.hitwh.secondhand.mapper")

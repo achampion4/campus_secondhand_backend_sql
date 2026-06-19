@@ -4,7 +4,7 @@ import com.hitwh.secondhand.common.ResultCode;
 
 /**
  * 自定义业务异常
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 public class BusinessException extends RuntimeException {
 

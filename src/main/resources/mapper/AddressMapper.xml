@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 收货地址 SQL 映射  负责人：董炜文  日期：6/18 -->
+<mapper namespace="com.hitwh.secondhand.mapper.AddressMapper">
+
+    <select id="findByUserId" resultType="com.hitwh.secondhand.entity.Address">
+        SELECT * FROM address WHERE user_id = #{userId} ORDER BY is_default DESC, address_id DESC
+    </select>
+
+    <select id="findById" resultType="com.hitwh.secondhand.entity.Address">
+        SELECT * FROM address WHERE address_id = #{addressId}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="addressId">
+        INSERT INTO address (user_id, receiver, phone, region, detail, is_default)
+        VALUES (#{userId}, #{receiver}, #{phone}, #{region}, #{detail}, #{isDefault})
+    </insert>
+
+    <update id="update">
+        UPDATE address
+        SET receiver = #{receiver}, phone = #{phone}, region = #{region},
+            detail = #{detail}, is_default = #{isDefault}
+        WHERE address_id = #{addressId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM address WHERE address_id = #{addressId}
+    </delete>
+
+    <update id="clearDefault">
+        UPDATE address SET is_default = 0 WHERE user_id = #{userId}
+    </update>
+
+</mapper>

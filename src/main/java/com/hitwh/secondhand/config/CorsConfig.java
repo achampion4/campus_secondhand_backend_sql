@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 跨域配置：支持前后端分离开发
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {

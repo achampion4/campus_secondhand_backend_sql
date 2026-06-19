@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * 健康检查接口：用于验证后端骨架是否正常运行
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @RestController
 @RequestMapping("/api/ping")

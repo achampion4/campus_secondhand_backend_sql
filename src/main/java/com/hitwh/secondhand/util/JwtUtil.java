@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * JWT 工具类：生成与解析 Token
- * 负责人：同学C  日期：6/17
+ * 负责人：董炜文  日期：6/17
  */
 @Component
 public class JwtUtil {
