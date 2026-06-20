@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 商品 SQL 映射  负责人：董炜文  日期：6/19 -->
+<mapper namespace="com.hitwh.secondhand.mapper.ProductMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO product (seller_id, category_id, title, description, price, condition_level, status)
+        VALUES (#{sellerId}, #{categoryId}, #{title}, #{description}, #{price}, #{conditionLevel}, 1)
+    </insert>
+
+    <update id="update">
+        UPDATE product
+        SET category_id = #{categoryId}, title = #{title}, description = #{description},
+            price = #{price}, condition_level = #{conditionLevel}
+        WHERE product_id = #{productId}
+    </update>
+
+    <!-- 详情：联表带出分类名与卖家昵称 -->
+    <select id="findById" resultType="com.hitwh.secondhand.entity.Product">
+        SELECT p.*, c.name AS category_name, u.nickname AS seller_nickname
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.category_id
+        LEFT JOIN `user` u ON p.seller_id = u.user_id
+        WHERE p.product_id = #{productId}
+    </select>
+
+    <!-- 公共查询条件 -->
+    <sql id="queryWhere">
+        <where>
+            p.status = 1
+            <if test="keyword != null and keyword != ''">
+                AND p.title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="categoryId != null">
+                AND p.category_id = #{categoryId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByQuery" resultType="com.hitwh.secondhand.entity.Product">
+        SELECT p.*, c.name AS category_name
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.category_id
+        <include refid="queryWhere"/>
+        ORDER BY p.created_at DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(*) FROM product p
+        <include refid="queryWhere"/>
+    </select>
+
+    <update id="updateStatus">
+        UPDATE product SET status = #{status} WHERE product_id = #{productId}
+    </update>
+
+    <update id="increaseView">
+        UPDATE product SET view_count = view_count + 1 WHERE product_id = #{productId}
+    </update>
+
+</mapper>

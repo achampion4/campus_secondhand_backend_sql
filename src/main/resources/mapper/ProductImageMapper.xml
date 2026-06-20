@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 商品图片 SQL 映射  负责人：董炜文  日期：6/19 -->
+<mapper namespace="com.hitwh.secondhand.mapper.ProductImageMapper">
+
+    <insert id="batchInsert">
+        INSERT INTO product_image (product_id, url, sort_order) VALUES
+        <foreach collection="list" item="img" separator=",">
+            (#{img.productId}, #{img.url}, #{img.sortOrder})
+        </foreach>
+    </insert>
+
+    <select id="findUrlsByProductId" resultType="java.lang.String">
+        SELECT url FROM product_image WHERE product_id = #{productId} ORDER BY sort_order
+    </select>
+
+    <delete id="deleteByProductId">
+        DELETE FROM product_image WHERE product_id = #{productId}
+    </delete>
+
+</mapper>

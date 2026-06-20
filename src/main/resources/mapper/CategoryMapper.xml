@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 商品分类 SQL 映射  负责人：董炜文  日期：6/19 -->
+<mapper namespace="com.hitwh.secondhand.mapper.CategoryMapper">
+
+    <select id="findAll" resultType="com.hitwh.secondhand.entity.Category">
+        SELECT category_id, name, parent_id FROM category ORDER BY parent_id, category_id
+    </select>
+
+</mapper>
