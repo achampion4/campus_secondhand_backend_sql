@@ -41,6 +41,7 @@ src/main/java/com/hitwh/secondhand/
 └── util/                         # 工具类
     └── JwtUtil.java              # JWT 生成/解析工具
 ```
+> 待建包：`entity/`（实体类）、`mapper/`（MyBatis 映射器）——随业务模块开发逐步补充。
 
 ---
 
@@ -57,6 +58,15 @@ src/main/java/com/hitwh/secondhand/
 | `product_image`  | 商品图片表 | 图片URL、排序                              |
 
 > 后续待建表：`order_info`、`order_item`（订单模块）、`favorite`、`message`、`review`（社交模块）、`report`（后台模块）。
+
+### 测试数据
+
+| 文件 | 说明 |
+|---|---|
+| `sql/init_data.sql` | 示例数据：4 用户、10 分类、2 地址、4 商品 |
+| `sql/test/more_products.sql` | 商品测试数据：15 条（覆盖多分类，支持分页/搜索测试） |
+| `sql/test/integrity_test.sql` | 完整性约束测试脚本（6 条用例，默认注释） |
+| `sql/test/product_test.sql` | 商品模块功能查询 + 约束验证（6+4 条） |
 
 ---
 
@@ -163,10 +173,13 @@ GET http://localhost:8080/api/ping
 
 ## 👥 团队分工
 
-后端成员
-dww
-fzy
-hjh
+| 成员 | 职责 |
+| ---- | ---- |
+| dww  | （待定） |
+| fzy  | （待定） |
+| hjh  | 数据库设计与测试 |
+
+> 后端代码负责人标记于各文件注释中，随模块推进逐步实名。
 
 ---
 
@@ -175,7 +188,8 @@ hjh
 | 日期   | 内容                                         |
 | ------ | -------------------------------------------- |
 | 6/17   | 项目初始化：Spring Boot 骨架、数据库建表、JWT |
-| 6/19   | 补充 README 文档                              |
+| 6/19   | 补充 README 文档、商品测试数据与功能查询 SQL |
+| 6/20   | 完善测试计划、补充完整性约束测试用例、对齐文档与 SQL |
 | 6/21   | 待：订单模块（order_info、order_item）       |
 | 6/23   | 待：社交模块（favorite、message、review）    |
 | 6/25   | 待：后台模块（report）                       |
