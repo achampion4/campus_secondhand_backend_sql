@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 收藏 SQL 映射  负责人：范振扬  日期：6/21 -->
+<mapper namespace="com.hitwh.secondhand.mapper.FavoriteMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="favoriteId">
+        INSERT INTO favorite (user_id, product_id) VALUES (#{userId}, #{productId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM favorite WHERE user_id = #{userId} AND product_id = #{productId}
+    </delete>
+
+    <select id="findByUserAndProduct" resultType="com.hitwh.secondhand.entity.Favorite">
+        SELECT * FROM favorite WHERE user_id = #{userId} AND product_id = #{productId}
+    </select>
+
+    <select id="findByUserId" resultType="com.hitwh.secondhand.entity.Favorite">
+        SELECT f.*, p.title AS product_title, p.price AS product_price, p.status AS product_status
+        FROM favorite f
+        LEFT JOIN product p ON f.product_id = p.product_id
+        WHERE f.user_id = #{userId}
+        ORDER BY f.created_at DESC
+    </select>
+
+</mapper>
