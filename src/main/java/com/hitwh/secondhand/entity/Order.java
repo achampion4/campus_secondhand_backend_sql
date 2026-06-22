@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 订单实体，对应表 order_info（6/21 订单模块使用）
- * 负责人：同学D  日期：6/19
+ * 负责人：范振扬  日期：6/19
  */
 @Data
 public class Order {

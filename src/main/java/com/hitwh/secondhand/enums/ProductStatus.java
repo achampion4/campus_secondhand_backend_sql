@@ -2,7 +2,7 @@ package com.hitwh.secondhand.enums;
 
 /**
  * 商品状态枚举（交易模块用于校验"在售/已售"约束）
- * 负责人：同学D  日期：6/18
+ * 负责人：范振扬  日期：6/18
  */
 public enum ProductStatus {
 

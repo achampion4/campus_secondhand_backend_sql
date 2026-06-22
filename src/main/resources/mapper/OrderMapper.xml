@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 订单 SQL 映射（6/21 订单模块使用）  负责人：范振扬  日期：6/20 -->
+<mapper namespace="com.hitwh.secondhand.mapper.OrderMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO order_info (buyer_id, seller_id, total_amount, status, address_id)
+        VALUES (#{buyerId}, #{sellerId}, #{totalAmount}, #{status}, #{addressId})
+    </insert>
+
+    <select id="findById" resultType="com.hitwh.secondhand.entity.Order">
+        SELECT * FROM order_info WHERE order_id = #{orderId}
+    </select>
+
+    <select id="findByBuyer" resultType="com.hitwh.secondhand.entity.Order">
+        SELECT * FROM order_info WHERE buyer_id = #{buyerId} ORDER BY created_at DESC
+    </select>
+
+    <select id="findBySeller" resultType="com.hitwh.secondhand.entity.Order">
+        SELECT * FROM order_info WHERE seller_id = #{sellerId} ORDER BY created_at DESC
+    </select>
+
+    <update id="updateStatus">
+        UPDATE order_info SET status = #{status} WHERE order_id = #{orderId}
+    </update>
+
+</mapper>
