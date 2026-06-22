@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 举报 SQL 映射  负责人：hjh  日期：6/21 -->
+<mapper namespace="com.hitwh.secondhand.mapper.ReportMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="reportId">
+        INSERT INTO report (reporter_id, product_id, reason, status)
+        VALUES (#{reporterId}, #{productId}, #{reason}, 0)
+    </insert>
+
+    <select id="findAll" resultType="com.hitwh.secondhand.entity.Report">
+        SELECT r.*, p.title AS product_title, u.nickname AS reporter_nickname
+        FROM report r
+        LEFT JOIN product p ON r.product_id = p.product_id
+        LEFT JOIN `user` u ON r.reporter_id = u.user_id
+        ORDER BY r.status ASC, r.created_at DESC
+    </select>
+
+    <update id="updateStatus">
+        UPDATE report SET status = #{status} WHERE report_id = #{reportId}
+    </update>
+
+</mapper>

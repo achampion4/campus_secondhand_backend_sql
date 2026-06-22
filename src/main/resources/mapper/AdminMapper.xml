@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 后台管理 / 统计 SQL 映射  负责人：hjh  日期：6/21 -->
+<mapper namespace="com.hitwh.secondhand.mapper.AdminMapper">
+
+    <!-- 用户列表（不含密码） -->
+    <select id="listUsers" resultType="com.hitwh.secondhand.entity.User">
+        SELECT user_id, username, nickname, avatar, credit_score, role, status, created_at
+        FROM `user` ORDER BY user_id
+    </select>
+
+    <update id="updateUserStatus">
+        UPDATE `user` SET status = #{status} WHERE user_id = #{userId}
+    </update>
+
+    <!-- 全部商品（含各状态），带分类名与卖家昵称 -->
+    <select id="listAllProducts" resultType="com.hitwh.secondhand.entity.Product">
+        SELECT p.*, c.name AS category_name, u.nickname AS seller_nickname
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.category_id
+        LEFT JOIN `user` u ON p.seller_id = u.user_id
+        ORDER BY p.created_at DESC
+    </select>
+
+    <!-- 统计 -->
+    <select id="countUsers" resultType="long">SELECT COUNT(*) FROM `user`</select>
+    <select id="countProducts" resultType="long">SELECT COUNT(*) FROM product</select>
+    <select id="countOrders" resultType="long">SELECT COUNT(*) FROM order_info</select>
+
+    <select id="totalSales" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(total_amount), 0) FROM order_info WHERE status = 3
+    </select>
+
+    <!-- 热门分类：在售商品数 -->
+    <select id="hotCategories" resultType="map">
+        SELECT c.name AS name, COUNT(p.product_id) AS cnt
+        FROM category c
+        LEFT JOIN product p ON p.category_id = c.category_id AND p.status = 1
+        GROUP BY c.category_id, c.name
+        HAVING cnt > 0
+        ORDER BY cnt DESC
+    </select>
+
+    <!-- 活跃用户：下单数 Top5 -->
+    <select id="activeUsers" resultType="map">
+        SELECT u.nickname AS name, COUNT(o.order_id) AS cnt
+        FROM `user` u
+        JOIN order_info o ON o.buyer_id = u.user_id
+        GROUP BY u.user_id, u.nickname
+        ORDER BY cnt DESC
+        LIMIT 5
+    </select>
+
+</mapper>
