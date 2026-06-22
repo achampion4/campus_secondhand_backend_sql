@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 订单明细 SQL 映射（6/21 订单模块使用）  负责人：范振扬  日期：6/20 -->
+<mapper namespace="com.hitwh.secondhand.mapper.OrderItemMapper">
+
+    <insert id="batchInsert">
+        INSERT INTO order_item (order_id, product_id, price) VALUES
+        <foreach collection="list" item="it" separator=",">
+            (#{it.orderId}, #{it.productId}, #{it.price})
+        </foreach>
+    </insert>
+
+    <!-- 联表带出商品标题，便于订单列表展示 -->
+    <select id="findByOrderId" resultType="com.hitwh.secondhand.entity.OrderItem">
+        SELECT oi.*, p.title AS product_title
+        FROM order_item oi
+        LEFT JOIN product p ON oi.product_id = p.product_id
+        WHERE oi.order_id = #{orderId}
+    </select>
+
+</mapper>

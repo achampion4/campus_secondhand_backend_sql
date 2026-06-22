@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 /**
  * 订单明细实体，对应表 order_item（6/21 订单模块使用）
- * 负责人：同学D  日期：6/19
+ * 负责人：范振扬  日期：6/19
  */
 @Data
 public class OrderItem {

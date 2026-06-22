@@ -2,7 +2,7 @@ package com.hitwh.secondhand.enums;
 
 /**
  * 订单状态枚举（6/21 订单模块使用）
- * 负责人：同学D  日期：6/18
+ * 负责人：范振扬  日期：6/18
  */
 public enum OrderStatus {
 
