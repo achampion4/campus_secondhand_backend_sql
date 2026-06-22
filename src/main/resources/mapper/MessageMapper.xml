@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 聊天消息 SQL 映射  负责人：范振扬  日期：6/21 -->
+<mapper namespace="com.hitwh.secondhand.mapper.MessageMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="messageId">
+        INSERT INTO message (sender_id, receiver_id, product_id, content, is_read)
+        VALUES (#{senderId}, #{receiverId}, #{productId}, #{content}, 0)
+    </insert>
+
+    <select id="conversation" resultType="com.hitwh.secondhand.entity.Message">
+        SELECT m.*, u.nickname AS sender_nickname
+        FROM message m
+        LEFT JOIN `user` u ON m.sender_id = u.user_id
+        WHERE m.product_id = #{productId}
+          AND ((m.sender_id = #{me} AND m.receiver_id = #{other})
+            OR (m.sender_id = #{other} AND m.receiver_id = #{me}))
+        ORDER BY m.created_at ASC
+    </select>
+
+    <select id="recentInvolving" resultType="com.hitwh.secondhand.entity.Message">
+        SELECT m.*, u.nickname AS sender_nickname
+        FROM message m
+        LEFT JOIN `user` u ON m.sender_id = u.user_id
+        WHERE m.sender_id = #{userId} OR m.receiver_id = #{userId}
+        ORDER BY m.created_at DESC
+        LIMIT 100
+    </select>
+
+    <update id="markRead">
+        UPDATE message SET is_read = 1
+        WHERE receiver_id = #{me} AND sender_id = #{other} AND product_id = #{productId}
+    </update>
+
+</mapper>
