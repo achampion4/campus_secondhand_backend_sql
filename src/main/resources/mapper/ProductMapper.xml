@@ -39,7 +39,9 @@
     </sql>
 
     <select id="selectByQuery" resultType="com.hitwh.secondhand.entity.Product">
-        SELECT p.*, c.name AS category_name
+        SELECT p.*, c.name AS category_name,
+            (SELECT pi.url FROM product_image pi WHERE pi.product_id = p.product_id
+             ORDER BY pi.sort_order LIMIT 1) AS cover
         FROM product p
         LEFT JOIN category c ON p.category_id = c.category_id
         <include refid="queryWhere"/>

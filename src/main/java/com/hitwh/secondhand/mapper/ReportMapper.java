@@ -18,5 +18,8 @@ public interface ReportMapper {
     /** 全部举报（带商品标题、举报人昵称），供后台处理 */
     List<Report> findAll();
 
+    /** 按ID查询(处理举报时取被举报商品ID) */
+    Report findById(Long reportId);
+
     int updateStatus(@Param("reportId") Long reportId, @Param("status") Integer status);
 }

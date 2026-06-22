@@ -17,6 +17,10 @@
         ORDER BY r.status ASC, r.created_at DESC
     </select>
 
+    <select id="findById" resultType="com.hitwh.secondhand.entity.Report">
+        SELECT * FROM report WHERE report_id = #{reportId}
+    </select>
+
     <update id="updateStatus">
         UPDATE report SET status = #{status} WHERE report_id = #{reportId}
     </update>

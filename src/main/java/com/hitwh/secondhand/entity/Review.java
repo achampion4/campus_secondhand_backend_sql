@@ -20,4 +20,7 @@ public class Review {
 
     // 关联展示字段（非数据库列）
     private String reviewerNickname;
+    private Long productId;       // 关联商品ID
+    private String productTitle;  // 商品标题
+    private String productCover;  // 商品封面图
 }

@@ -14,9 +14,14 @@
     </select>
 
     <select id="findByTarget" resultType="com.hitwh.secondhand.entity.Review">
-        SELECT r.*, u.nickname AS reviewer_nickname
+        SELECT r.*, u.nickname AS reviewer_nickname,
+               p.product_id AS product_id, p.title AS product_title,
+               (SELECT pi.url FROM product_image pi WHERE pi.product_id = p.product_id
+                ORDER BY pi.sort_order LIMIT 1) AS product_cover
         FROM review r
         LEFT JOIN `user` u ON r.reviewer_id = u.user_id
+        LEFT JOIN order_item oi ON oi.order_id = r.order_id
+        LEFT JOIN product p ON p.product_id = oi.product_id
         WHERE r.target_id = #{targetId}
         ORDER BY r.created_at DESC
     </select>

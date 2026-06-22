@@ -20,4 +20,6 @@ public class Message {
 
     // 关联展示字段（非数据库列）
     private String senderNickname;
+    private String receiverNickname; // 接收者昵称
+    private String productTitle;     // 关联商品标题
 }

@@ -27,7 +27,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/api/user/register",
                         "/api/ping",
                         "/api/product/list",          // 商品列表游客可见
-                        "/api/product/detail/**"
+                        "/api/product/detail/**",
+                        "/api/review/user/**"         // 卖家评价游客可见
                 );
     }
 }

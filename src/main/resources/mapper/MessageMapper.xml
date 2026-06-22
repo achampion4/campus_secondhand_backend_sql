@@ -20,12 +20,15 @@
     </select>
 
     <select id="recentInvolving" resultType="com.hitwh.secondhand.entity.Message">
-        SELECT m.*, u.nickname AS sender_nickname
+        SELECT m.*, su.nickname AS sender_nickname, ru.nickname AS receiver_nickname,
+               p.title AS product_title
         FROM message m
-        LEFT JOIN `user` u ON m.sender_id = u.user_id
+        LEFT JOIN `user` su ON m.sender_id = su.user_id
+        LEFT JOIN `user` ru ON m.receiver_id = ru.user_id
+        LEFT JOIN product p ON m.product_id = p.product_id
         WHERE m.sender_id = #{userId} OR m.receiver_id = #{userId}
         ORDER BY m.created_at DESC
-        LIMIT 100
+        LIMIT 200
     </select>
 
     <update id="markRead">
