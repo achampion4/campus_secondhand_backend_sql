@@ -3,19 +3,17 @@ package com.hitwh.secondhand.dto;
 import com.hitwh.secondhand.entity.Product;
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * AI 导购推荐结果：一个关键词 + 该关键词命中的商品
+ * AI 导购推荐项：一件被 AI 选中的商品 + 推荐理由
  * 负责人：hjh  日期：6/22
  */
 @Data
 public class AiRecommendGroup {
-    private String keyword;          // AI 提取的需求关键词
-    private List<Product> products;  // 该关键词命中的在售商品
+    private Product product;  // 推荐的商品
+    private String reason;    // AI 给出的推荐理由
 
-    public AiRecommendGroup(String keyword, List<Product> products) {
-        this.keyword = keyword;
-        this.products = products;
+    public AiRecommendGroup(Product product, String reason) {
+        this.product = product;
+        this.reason = reason;
     }
 }

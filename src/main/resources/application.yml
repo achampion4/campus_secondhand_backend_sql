@@ -21,3 +21,8 @@ mybatis:
 jwt:
   secret: campus-secondhand-secret-key-please-change-in-production-2026
   expire: 86400000   # 过期时间(毫秒)，24小时
+
+deepseek:
+  api-key: sk-56e3e233d66d44649163c01b767e8de1   # 到 platform.deepseek.com 注册获取
+  url: https://api.deepseek.com/chat/completions
+  model: deepseek-chat
