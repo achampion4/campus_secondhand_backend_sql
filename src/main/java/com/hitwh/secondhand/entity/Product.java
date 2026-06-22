@@ -26,5 +26,6 @@ public class Product {
     // 以下为关联展示字段(非数据库列，查询时按需填充)
     private String categoryName;   // 分类名
     private String sellerNickname; // 卖家昵称
-    private List<String> images;   // 图片URL列表
+    private List<String> images;   // 图片URL列表(详情用)
+    private String cover;          // 封面图(列表用，取第一张)
 }
