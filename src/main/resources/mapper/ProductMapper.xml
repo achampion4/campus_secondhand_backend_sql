@@ -54,6 +54,17 @@
         <include refid="queryWhere"/>
     </select>
 
+    <!-- 我的发布：某卖家全部商品(含已售/下架)，带分类名与封面图 -->
+    <select id="selectBySeller" resultType="com.hitwh.secondhand.entity.Product">
+        SELECT p.*, c.name AS category_name,
+            (SELECT pi.url FROM product_image pi WHERE pi.product_id = p.product_id
+             ORDER BY pi.sort_order LIMIT 1) AS cover
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.category_id
+        WHERE p.seller_id = #{sellerId}
+        ORDER BY p.created_at DESC
+    </select>
+
     <update id="updateStatus">
         UPDATE product SET status = #{status} WHERE product_id = #{productId}
     </update>

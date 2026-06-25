@@ -29,7 +29,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/api/product/list",          // 商品列表游客可见
                         "/api/product/detail/**",
                         "/api/review/user/**",        // 卖家评价游客可见
-                        "/api/ai/recommend"           // AI 导购游客可体验
+                        "/api/ai/recommend",          // AI 导购游客可体验
+                        "/api/user/auth/**",          // 查看实名认证(交易双方)
+                        "/api/file/upload"            // 文件上传(注册传学生证需未登录可用)
                 );
     }
 }

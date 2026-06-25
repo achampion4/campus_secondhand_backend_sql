@@ -40,6 +40,9 @@ public class UserServiceImpl implements UserService {
         user.setUsername(dto.getUsername());
         user.setPassword(passwordEncoder.encode(dto.getPassword())); // 加密存储
         user.setNickname(dto.getNickname());
+        user.setRealName(dto.getRealName());
+        user.setStudentId(dto.getStudentId());
+        user.setStudentCardImg(dto.getStudentCardImg());
         userMapper.insert(user);
         return user.getUserId();
     }

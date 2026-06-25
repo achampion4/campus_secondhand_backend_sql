@@ -21,4 +21,13 @@ public class RegisterDTO {
 
     @NotBlank(message = "昵称不能为空")
     private String nickname;
+
+    // 建议1：实名认证（上传不校验，由同校双方自辨真伪）
+    @NotBlank(message = "请填写真实姓名")
+    private String realName;
+
+    @NotBlank(message = "请填写学号")
+    private String studentId;
+
+    private String studentCardImg; // 学生证照片URL
 }

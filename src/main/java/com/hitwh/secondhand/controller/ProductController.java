@@ -45,6 +45,13 @@ public class ProductController {
         return Result.success(productService.page(query));
     }
 
+    /** 我发布的商品 (需登录，含已售/下架) */
+    @GetMapping("/mine")
+    public Result<java.util.List<Product>> mine(HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("userId");
+        return Result.success(productService.mine(userId));
+    }
+
     /** 商品详情 (白名单，游客可见) */
     @GetMapping("/detail/{productId}")
     public Result<Product> detail(@PathVariable Long productId) {

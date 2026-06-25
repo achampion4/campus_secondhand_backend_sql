@@ -13,8 +13,8 @@
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO `user` (username, password, nickname, role, status)
-        VALUES (#{username}, #{password}, #{nickname}, 0, 1)
+        INSERT INTO `user` (username, password, nickname, real_name, student_id, student_card_img, role, status)
+        VALUES (#{username}, #{password}, #{nickname}, #{realName}, #{studentId}, #{studentCardImg}, 0, 1)
     </insert>
 
     <update id="updateProfile">

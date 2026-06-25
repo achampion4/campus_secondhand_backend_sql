@@ -99,6 +99,11 @@ public class ProductServiceImpl implements ProductService {
         productMapper.updateStatus(productId, 0); // 0=下架
     }
 
+    @Override
+    public List<Product> mine(Long sellerId) {
+        return productMapper.selectBySeller(sellerId);
+    }
+
     /** 保存商品图片列表 */
     private void saveImages(Long productId, List<String> urls) {
         if (urls == null || urls.isEmpty()) {

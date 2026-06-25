@@ -14,6 +14,9 @@ public class User {
     private String username;      // 登录账号
     private String password;      // 密码(BCrypt)
     private String nickname;      // 昵称
+    private String realName;      // 真实姓名(实名认证)
+    private String studentId;     // 学号(可含字母)
+    private String studentCardImg;// 学生证照片URL
     private String avatar;        // 头像URL
     private Integer creditScore;  // 信用分
     private Integer role;         // 0普通用户,1管理员

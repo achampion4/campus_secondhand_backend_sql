@@ -25,4 +25,7 @@ public interface ProductService {
 
     /** 下架商品(仅卖家本人) */
     void offShelf(Long sellerId, Long productId);
+
+    /** 我发布的商品(含各状态) */
+    java.util.List<Product> mine(Long sellerId);
 }

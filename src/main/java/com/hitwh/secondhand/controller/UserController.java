@@ -44,6 +44,12 @@ public class UserController {
         return Result.success(userService.getProfile(userId));
     }
 
+    /** 查看某用户的实名认证信息（交易双方互查，白名单） */
+    @GetMapping("/auth/{userId}")
+    public Result<User> auth(@PathVariable Long userId) {
+        return Result.success(userService.getProfile(userId));
+    }
+
     /** 更新个人资料 (需登录) */
     @PutMapping("/profile")
     public Result<Void> updateProfile(@RequestBody User user, HttpServletRequest request) {

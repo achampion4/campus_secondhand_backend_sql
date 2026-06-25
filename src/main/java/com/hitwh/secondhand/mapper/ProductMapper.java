@@ -29,6 +29,9 @@ public interface ProductMapper {
     /** 条件统计总数 */
     long countByQuery(ProductQuery query);
 
+    /** 查询某卖家的全部商品(我的发布，含各状态) */
+    List<Product> selectBySeller(Long sellerId);
+
     /** 更新商品状态(下架/已售) */
     int updateStatus(@Param("productId") Long productId, @Param("status") Integer status);
 
