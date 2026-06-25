@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 黑名单 SQL 映射  负责人：范振扬  日期：6/23 -->
+<mapper namespace="com.hitwh.secondhand.mapper.BlacklistMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blacklist (user_id, blocked_id) VALUES (#{userId}, #{blockedId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM blacklist WHERE user_id = #{userId} AND blocked_id = #{blockedId}
+    </delete>
+
+    <select id="findByUserId" resultType="com.hitwh.secondhand.entity.Blacklist">
+        SELECT b.*, u.nickname AS blocked_nickname
+        FROM blacklist b
+        LEFT JOIN `user` u ON b.blocked_id = u.user_id
+        WHERE b.user_id = #{userId}
+        ORDER BY b.created_at DESC
+    </select>
+
+    <select id="countBlocked" resultType="int">
+        SELECT COUNT(*) FROM blacklist WHERE user_id = #{userId} AND blocked_id = #{blockedId}
+    </select>
+
+</mapper>
