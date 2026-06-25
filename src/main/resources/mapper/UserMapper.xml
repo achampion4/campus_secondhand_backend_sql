@@ -21,7 +21,6 @@
         UPDATE `user`
         <set>
             <if test="nickname != null">nickname = #{nickname},</if>
-            <if test="avatar != null">avatar = #{avatar},</if>
         </set>
         WHERE user_id = #{userId}
     </update>

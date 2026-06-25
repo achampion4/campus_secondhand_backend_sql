@@ -17,7 +17,6 @@ public class User {
     private String realName;      // 真实姓名(实名认证)
     private String studentId;     // 学号(可含字母)
     private String studentCardImg;// 学生证照片URL
-    private String avatar;        // 头像URL
     private Integer creditScore;  // 信用分
     private Integer role;         // 0普通用户,1管理员
     private Integer status;       // 0封禁,1正常

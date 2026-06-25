@@ -6,7 +6,7 @@
 
     <!-- 用户列表（不含密码） -->
     <select id="listUsers" resultType="com.hitwh.secondhand.entity.User">
-        SELECT user_id, username, nickname, avatar, credit_score, role, status, created_at
+        SELECT user_id, username, nickname, credit_score, role, status, created_at
         FROM `user` ORDER BY user_id
     </select>
 
