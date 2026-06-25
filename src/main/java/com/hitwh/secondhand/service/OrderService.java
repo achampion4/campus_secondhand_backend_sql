@@ -14,6 +14,9 @@ public interface OrderService {
     /** 下单（校验：商品在售、非自售；下单后锁定商品为已售） */
     Long create(Long buyerId, OrderForm form);
 
+    /** 建议2：卖家在聊天中"确认卖出"给某买家（纯交流模式，无支付/物流），返回成交记录ID */
+    Long confirmSell(Long sellerId, Long productId, Long buyerId);
+
     /** 卖家发货 */
     void ship(Long sellerId, Long orderId);
 

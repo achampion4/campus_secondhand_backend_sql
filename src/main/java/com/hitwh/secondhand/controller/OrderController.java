@@ -31,6 +31,13 @@ public class OrderController {
         return Result.success(orderService.create(userId, form));
     }
 
+    /** 建议2：卖家确认卖出给某买家（body: {"productId":x,"buyerId":y}） */
+    @PostMapping("/confirm-sell")
+    public Result<Long> confirmSell(@RequestBody java.util.Map<String, Long> body, HttpServletRequest request) {
+        Long sellerId = (Long) request.getAttribute("userId");
+        return Result.success(orderService.confirmSell(sellerId, body.get("productId"), body.get("buyerId")));
+    }
+
     /** 我买到的 */
     @GetMapping("/bought")
     public Result<List<Order>> bought(HttpServletRequest request) {

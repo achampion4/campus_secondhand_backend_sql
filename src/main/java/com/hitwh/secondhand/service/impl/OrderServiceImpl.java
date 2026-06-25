@@ -67,6 +67,39 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
+    public Long confirmSell(Long sellerId, Long productId, Long buyerId) {
+        Product product = productMapper.findById(productId);
+        if (product == null) {
+            throw new BusinessException("商品不存在");
+        }
+        if (!product.getSellerId().equals(sellerId)) {
+            throw new BusinessException("只有卖家本人可确认卖出");
+        }
+        if (product.getStatus() != 1) {
+            throw new BusinessException("商品已售出或已下架");
+        }
+        if (buyerId.equals(sellerId)) {
+            throw new BusinessException("不能卖给自己");
+        }
+        // 纯交流模式：生成成交记录(无地址、直接已完成)，商品置已售
+        Order order = new Order();
+        order.setBuyerId(buyerId);
+        order.setSellerId(sellerId);
+        order.setTotalAmount(product.getPrice());
+        order.setStatus(3); // 3=已完成/已成交
+        order.setAddressId(null);
+        orderMapper.insert(order);
+        OrderItem item = new OrderItem();
+        item.setOrderId(order.getOrderId());
+        item.setProductId(productId);
+        item.setPrice(product.getPrice());
+        orderItemMapper.batchInsert(Collections.singletonList(item));
+        productMapper.updateStatus(productId, 2);
+        return order.getOrderId();
+    }
+
+    @Override
     public void ship(Long sellerId, Long orderId) {
         Order order = getOwnedOrder(orderId, sellerId, false);
         if (order.getStatus() != 1) {

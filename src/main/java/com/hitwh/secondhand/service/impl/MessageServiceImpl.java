@@ -3,6 +3,7 @@ package com.hitwh.secondhand.service.impl;
 import com.hitwh.secondhand.entity.Message;
 import com.hitwh.secondhand.exception.BusinessException;
 import com.hitwh.secondhand.mapper.MessageMapper;
+import com.hitwh.secondhand.service.BlacklistService;
 import com.hitwh.secondhand.service.MessageService;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,11 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService {
 
     private final MessageMapper messageMapper;
+    private final BlacklistService blacklistService;
 
-    public MessageServiceImpl(MessageMapper messageMapper) {
+    public MessageServiceImpl(MessageMapper messageMapper, BlacklistService blacklistService) {
         this.messageMapper = messageMapper;
+        this.blacklistService = blacklistService;
     }
 
     @Override
@@ -29,6 +32,10 @@ public class MessageServiceImpl implements MessageService {
         }
         if (message.getReceiverId().equals(senderId)) {
             throw new BusinessException("不能给自己发消息");
+        }
+        // 建议5：被对方拉黑则不能发消息
+        if (blacklistService.isBlockedBy(senderId, message.getReceiverId())) {
+            throw new BusinessException("对方已将你拉黑，无法发送消息");
         }
         message.setSenderId(senderId);
         messageMapper.insert(message);
